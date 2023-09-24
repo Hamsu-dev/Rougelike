@@ -1,0 +1,23 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfp8x6myvjllf"]
+
+[ext_resource type="Texture2D" uid="uid://c8hbmfkhhx2la" path="res://assets/Weapons/bullet.png" id="1_oj0ls"]
+[ext_resource type="Script" path="res://bullet.gd" id="1_sagtd"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bieeo"]
+size = Vector2(11, 8)
+
+[node name="Bullet" type="CharacterBody2D"]
+script = ExtResource("1_sagtd")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0.5, 0)
+shape = SubResource("RectangleShape2D_bieeo")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_oj0ls")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.5
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://cdk8wdbansy4p"]
+[gd_scene load_steps=32 format=3 uid="uid://cdk8wdbansy4p"]
 
 [ext_resource type="PackedScene" uid="uid://bwodprm42761v" path="res://scenes/characters/character.tscn" id="1_cycg5"]
 [ext_resource type="Script" path="res://scenes/characters/Player/player.gd" id="2_unoam"]
@@ -7,6 +7,9 @@
 [ext_resource type="Texture2D" uid="uid://bd6pwojfxrqt4" path="res://assets/Dungeons Assets/effects (new)/slash_effect_anim_spritesheet.png" id="5_0xnoi"]
 [ext_resource type="Texture2D" uid="uid://br5x2hrft3ewv" path="res://assets/Dungeons Assets/heroes/knight/knight_idle_spritesheet.png" id="6_ucqae"]
 [ext_resource type="Texture2D" uid="uid://bc2tt5mgylhe0" path="res://assets/Dungeons Assets/heroes/knight/knight_run_spritesheet.png" id="7_1af7v"]
+[ext_resource type="Texture2D" uid="uid://k5aro64outlg" path="res://assets/Weapons/basic_gun.png" id="8_kf01r"]
+[ext_resource type="PackedScene" uid="uid://gcj1nuudnc1a" path="res://scenes/weapons.tscn" id="8_nxiak"]
+[ext_resource type="PackedScene" uid="uid://1m5g77c1p5vi" path="res://scenes/dash.tscn" id="10_n6wi7"]
 
 [sub_resource type="Animation" id="Animation_vwnwq"]
 length = 0.001
@@ -310,23 +313,49 @@ animations = [{
 }]
 
 [node name="Player" instance=ExtResource("1_cycg5")]
-collision_layer = 2
-collision_mask = 5
+scale = Vector2(2, 2)
+collision_mask = 0
 script = ExtResource("2_unoam")
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("3_xfsp7")
 
-[node name="AnimationPlayer" parent="." index="1"]
+[node name="Weapon manager" type="Node" parent="." index="1"]
+
+[node name="Weapons" parent="Weapon manager" index="0" instance=ExtResource("8_nxiak")]
+scale = Vector2(2, 2)
+
+[node name="Node2D" type="Node2D" parent="Weapon manager/Weapons" index="0"]
+scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon manager/Weapons/Node2D" index="0"]
+texture = ExtResource("8_kf01r")
+
+[node name="Marker2D" type="Marker2D" parent="Weapon manager/Weapons/Node2D/Sprite2D" index="0"]
+position = Vector2(32, 10)
+
+[node name="Weapons2" parent="Weapon manager" index="1" instance=ExtResource("8_nxiak")]
+scale = Vector2(2, 2)
+
+[node name="Node2D" type="Node2D" parent="Weapon manager/Weapons2" index="0"]
+scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapon manager/Weapons2/Node2D" index="0"]
+texture = ExtResource("8_kf01r")
+
+[node name="Marker2D" type="Marker2D" parent="Weapon manager/Weapons2/Node2D/Sprite2D" index="0"]
+position = Vector2(32, 10)
+
+[node name="AnimationPlayer" parent="." index="2"]
 libraries = {
 "": SubResource("AnimationLibrary_xi0ia")
 }
 
-[node name="CollisionShape2D" parent="." index="2"]
-position = Vector2(0, 2)
+[node name="CollisionShape2D" parent="." index="3"]
 shape = SubResource("CircleShape2D_8e3cj")
 
-[node name="Sword" type="Node2D" parent="." index="3"]
+[node name="Sword" type="Node2D" parent="." index="4"]
+visible = false
 z_index = 2
 
 [node name="Node2D" type="Node2D" parent="Sword" index="0"]
@@ -350,7 +379,9 @@ libraries = {
 "": SubResource("AnimationLibrary_y3wy5")
 }
 
-[node name="AnimatedSprite2D" parent="." index="4"]
+[node name="AnimatedSprite2D" parent="." index="5"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_q2rym")
 animation = &"move"
+
+[node name="Dash" parent="." index="6" instance=ExtResource("10_n6wi7")]
