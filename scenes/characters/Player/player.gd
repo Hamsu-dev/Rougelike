@@ -1,22 +1,23 @@
 @icon("res://assets/Dungeons Assets/heroes/knight/knight_idle_anim_f0.png")
 extends Character
 
-@onready var weapons = $"Weapon manager/Weapons"
-@onready var sprite_2d = $"Weapon manager/Weapons/Node2D/Sprite2D"
+@onready var weapons = $Weapons
+@onready var gun1_sprite = $Weapons/Node2D/Sprite2D
 @onready var dash = $Dash
-
 
 
 
 @onready var sword: Node2D = get_node('Sword')
 @onready var sword_animation_player: AnimationPlayer = sword.get_node('SwordAnimationPlayer')
 
+const GUN2_OFFSET = Vector2(-30, 0)  # Adjust these values as needed
 const DASH_COOLDOWN = 10  # 1 second cooldown, adjust as needed
 var last_dash_time = -DASH_COOLDOWN  # Initialize to allow dashing immediately
 const DASH_SPEED = 800
 const DASH_LENGTH = .05
 const MAX_SPEED = 60  # Adjust the speed as needed
-const GUN_RADIUS = 30 # Adjust the radius of the circular range
+const GUN_RADIUS = 10 # Adjust the radius of the circular range
+
 
 
 var last_print_time = 0
@@ -67,16 +68,14 @@ func _input(event):
 		# Calculate the direction from the character to the mouse
 		var direction = (mouse_pos - global_position).normalized()
 
-		# Calculate the gun position within the circular range
-		var gun_position = global_position + direction * GUN_RADIUS
+		# Calculate the weapon position within the circular range for the first gun sprite
+		var gun1_position = global_position + direction * GUN_RADIUS
+		gun1_sprite.global_position = gun1_position
+		gun1_sprite.look_at(mouse_pos)
 
-		# Set the gun's position relative to the character
-		weapons.global_position = gun_position
+		# Adjust the sprite scaling based on the mouse position relative to the first gun sprite (or adjust as needed)
+		if mouse_pos.x < gun1_sprite.global_position.x:
+			gun1_sprite.scale = Vector2(1, -1)
+		elif mouse_pos.x > gun1_sprite.global_position.x:
+			gun1_sprite.scale = Vector2(1, 1)
 
-		# Look at the mouse position
-		weapons.look_at(mouse_pos)
-
-		if mouse_pos.x < weapons.global_position.x:
-			sprite_2d.scale = Vector2(1, -1)
-		elif mouse_pos.x > weapons.global_position.x:
-			sprite_2d.scale = Vector2(1, 1)

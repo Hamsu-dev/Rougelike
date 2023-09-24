@@ -320,41 +320,15 @@ script = ExtResource("2_unoam")
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("3_xfsp7")
 
-[node name="Weapon manager" type="Node" parent="." index="1"]
-
-[node name="Weapons" parent="Weapon manager" index="0" instance=ExtResource("8_nxiak")]
-scale = Vector2(2, 2)
-
-[node name="Node2D" type="Node2D" parent="Weapon manager/Weapons" index="0"]
-scale = Vector2(0.2, 0.2)
-
-[node name="Sprite2D" type="Sprite2D" parent="Weapon manager/Weapons/Node2D" index="0"]
-texture = ExtResource("8_kf01r")
-
-[node name="Marker2D" type="Marker2D" parent="Weapon manager/Weapons/Node2D/Sprite2D" index="0"]
-position = Vector2(32, 10)
-
-[node name="Weapons2" parent="Weapon manager" index="1" instance=ExtResource("8_nxiak")]
-scale = Vector2(2, 2)
-
-[node name="Node2D" type="Node2D" parent="Weapon manager/Weapons2" index="0"]
-scale = Vector2(0.2, 0.2)
-
-[node name="Sprite2D" type="Sprite2D" parent="Weapon manager/Weapons2/Node2D" index="0"]
-texture = ExtResource("8_kf01r")
-
-[node name="Marker2D" type="Marker2D" parent="Weapon manager/Weapons2/Node2D/Sprite2D" index="0"]
-position = Vector2(32, 10)
-
-[node name="AnimationPlayer" parent="." index="2"]
+[node name="AnimationPlayer" parent="." index="1"]
 libraries = {
 "": SubResource("AnimationLibrary_xi0ia")
 }
 
-[node name="CollisionShape2D" parent="." index="3"]
+[node name="CollisionShape2D" parent="." index="2"]
 shape = SubResource("CircleShape2D_8e3cj")
 
-[node name="Sword" type="Node2D" parent="." index="4"]
+[node name="Sword" type="Node2D" parent="." index="3"]
 visible = false
 z_index = 2
 
@@ -379,9 +353,20 @@ libraries = {
 "": SubResource("AnimationLibrary_y3wy5")
 }
 
-[node name="AnimatedSprite2D" parent="." index="5"]
+[node name="AnimatedSprite2D" parent="." index="4"]
 texture_filter = 1
 sprite_frames = SubResource("SpriteFrames_q2rym")
 animation = &"move"
+
+[node name="Weapons" parent="." index="5" instance=ExtResource("8_nxiak")]
+
+[node name="Node2D" type="Node2D" parent="Weapons" index="0"]
+scale = Vector2(0.2, 0.2)
+
+[node name="Sprite2D" type="Sprite2D" parent="Weapons/Node2D" index="0"]
+texture = ExtResource("8_kf01r")
+
+[node name="Marker2D" type="Marker2D" parent="Weapons/Node2D/Sprite2D" index="0"]
+position = Vector2(32, 10)
 
 [node name="Dash" parent="." index="6" instance=ExtResource("10_n6wi7")]
