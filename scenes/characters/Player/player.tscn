@@ -336,7 +336,6 @@ sprite_frames = SubResource("SpriteFrames_q2rym")
 animation = &"move"
 
 [node name="Weapons" parent="." index="5" instance=ExtResource("8_nxiak")]
-visible = false
 
 [node name="Node2D" type="Node2D" parent="Weapons" index="0"]
 scale = Vector2(0.2, 0.2)
