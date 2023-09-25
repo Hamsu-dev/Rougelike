@@ -1,7 +1,7 @@
 [gd_scene load_steps=37 format=3 uid="uid://cqoy6qwu1ltg8"]
 
 [ext_resource type="PackedScene" uid="uid://dtsww0ad32f22" path="res://scenes/characters/Enemies/enemy.tscn" id="1_yxjij"]
-[ext_resource type="Script" path="res://scenes/characters/Enemies/Wolf/WOLF_FiniteStateMachine.gd" id="2_bwpk2"]
+[ext_resource type="Script" path="res://scripts/WOLF_FiniteStateMachine.gd" id="2_biea2"]
 [ext_resource type="Texture2D" uid="uid://c3qv83y850m6w" path="res://assets/Dungeons Assets/enemies/Wolf/Massacre Sprite Sheet.png" id="3_31ccs"]
 [ext_resource type="PackedScene" uid="uid://cde36vwaj0j40" path="res://component/health_component.tscn" id="3_o1k7y"]
 [ext_resource type="PackedScene" uid="uid://c6hqa5g8v3mqu" path="res://scenes/hurtbox.tscn" id="4_r0ufq"]
@@ -342,7 +342,7 @@ animations = [{
 [node name="Wolf" instance=ExtResource("1_yxjij")]
 
 [node name="FiniteStateMachine" parent="." index="0"]
-script = ExtResource("2_bwpk2")
+script = ExtResource("2_biea2")
 
 [node name="HealthComponent" parent="." index="1" instance=ExtResource("3_o1k7y")]
 

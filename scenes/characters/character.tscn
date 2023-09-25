@@ -1,13 +1,13 @@
 [gd_scene load_steps=3 format=3 uid="uid://bwodprm42761v"]
 
-[ext_resource type="Script" path="res://Character.gd" id="1_sxdlc"]
-[ext_resource type="Script" path="res://FSM.gd" id="2_2t4jd"]
+[ext_resource type="Script" path="res://scripts/Character.gd" id="1_xrt2q"]
+[ext_resource type="Script" path="res://scripts/FSM.gd" id="2_3sful"]
 
 [node name="Character" type="CharacterBody2D"]
-script = ExtResource("1_sxdlc")
+script = ExtResource("1_xrt2q")
 
 [node name="FiniteStateMachine" type="Node" parent="."]
-script = ExtResource("2_2t4jd")
+script = ExtResource("2_3sful")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 

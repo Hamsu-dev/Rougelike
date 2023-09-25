@@ -1,8 +1,8 @@
 [gd_scene load_steps=32 format=3 uid="uid://cdk8wdbansy4p"]
 
 [ext_resource type="PackedScene" uid="uid://bwodprm42761v" path="res://scenes/characters/character.tscn" id="1_cycg5"]
-[ext_resource type="Script" path="res://scenes/characters/Player/player.gd" id="2_unoam"]
-[ext_resource type="Script" path="res://scenes/characters/Player/FiniteStateMachine.gd" id="3_xfsp7"]
+[ext_resource type="Script" path="res://scripts/player.gd" id="2_as5n5"]
+[ext_resource type="Script" path="res://scripts/FiniteStateMachine.gd" id="3_cktb7"]
 [ext_resource type="Texture2D" uid="uid://j2l0get6ylkj" path="res://assets/Weapons/sword_ice.png" id="4_ev66q"]
 [ext_resource type="Texture2D" uid="uid://bd6pwojfxrqt4" path="res://assets/Dungeons Assets/effects (new)/slash_effect_anim_spritesheet.png" id="5_0xnoi"]
 [ext_resource type="Texture2D" uid="uid://br5x2hrft3ewv" path="res://assets/Dungeons Assets/heroes/knight/knight_idle_spritesheet.png" id="6_ucqae"]
@@ -316,10 +316,10 @@ animations = [{
 scale = Vector2(2, 2)
 collision_layer = 2
 collision_mask = 5
-script = ExtResource("2_unoam")
+script = ExtResource("2_as5n5")
 
 [node name="FiniteStateMachine" parent="." index="0"]
-script = ExtResource("3_xfsp7")
+script = ExtResource("3_cktb7")
 
 [node name="AnimationPlayer" parent="." index="1"]
 libraries = {

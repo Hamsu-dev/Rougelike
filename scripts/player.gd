@@ -12,14 +12,12 @@ extends Character
 
 const GUN2_OFFSET = Vector2(-30, 0)  # Adjust these values as needed
 const DASH_COOLDOWN = 10  # 1 second cooldown, adjust as needed
-var last_dash_time = -DASH_COOLDOWN  # Initialize to allow dashing immediately
 const DASH_SPEED = 800
 const DASH_LENGTH = .05
 const MAX_SPEED = 60  # Adjust the speed as needed
 const GUN_RADIUS = 10 # Adjust the radius of the circular range
 
-
-
+var last_dash_time = -DASH_COOLDOWN  # Initialize to allow dashing immediately
 var last_print_time = 0
 
 func _process(delta: float):

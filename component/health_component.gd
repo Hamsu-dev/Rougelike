@@ -11,7 +11,6 @@ func _ready():
 	current_health = max_health
 
 func damage(damage_amount: float):
-	print("take dmg")
 	current_health = max(current_health - damage_amount, 0)
 	if current_health == 0:
 		died.emit()
