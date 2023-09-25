@@ -314,7 +314,8 @@ animations = [{
 
 [node name="Player" instance=ExtResource("1_cycg5")]
 scale = Vector2(2, 2)
-collision_mask = 0
+collision_layer = 2
+collision_mask = 13
 script = ExtResource("2_unoam")
 
 [node name="FiniteStateMachine" parent="." index="0"]

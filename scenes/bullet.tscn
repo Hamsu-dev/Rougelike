@@ -11,7 +11,8 @@ size = Vector2(11, 8)
 size = Vector2(11, 8)
 
 [node name="Bullet" type="CharacterBody2D"]
-collision_layer = 0
+collision_layer = 8
+collision_mask = 5
 script = ExtResource("1_sagtd")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -25,6 +26,8 @@ texture = ExtResource("1_oj0ls")
 autostart = true
 
 [node name="HitboxComponent" parent="." instance=ExtResource("3_263o2")]
+collision_layer = 8
+collision_mask = 5
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(0.5, 0)
