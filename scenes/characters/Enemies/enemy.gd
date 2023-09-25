@@ -5,11 +5,8 @@ class_name Enemies
 @onready var player: CharacterBody2D = get_tree().current_scene.get_node('Player')
 @onready var path_timer: Timer = get_node('PathTimer')
 @onready var navigation_agent: NavigationAgent2D = get_node('NavigationAgent2D')
-@onready var health_component = $HealthComponent
+@onready var health_component: HealthComponent = $HealthComponent
 
-func _ready() -> void:
-	path_timer.start()
-	$Hurtbox.area_entered.connect(_on_area_2d_area_entered)
 
 func chase() -> void:
 	if not navigation_agent.is_target_reached():
@@ -33,8 +30,3 @@ func _on_path_timer_timeout():
 	else:
 		path_timer.stop()
 		move_direction = Vector2.ZERO
-
-
-func _on_area_2d_area_entered(area):
-	queue_free()
-
