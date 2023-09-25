@@ -40,7 +40,7 @@ func get_input():
 
 func add_ghost():
 	var ghost = ghost_node.instantiate()
-	ghost.set_property(position, $Sprite2D.scale)
+	ghost.set_property(position, $AnimatedSprite2D.scale)
 	get_tree().current_scene.add_child(ghost)
  
  

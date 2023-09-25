@@ -1,12 +1,13 @@
-[gd_scene load_steps=34 format=3 uid="uid://cdk8wdbansy4p"]
+[gd_scene load_steps=36 format=3 uid="uid://cdk8wdbansy4p"]
 
 [ext_resource type="PackedScene" uid="uid://bwodprm42761v" path="res://scenes/characters/character.tscn" id="1_cycg5"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_as5n5"]
 [ext_resource type="Script" path="res://scripts/FiniteStateMachine.gd" id="3_cktb7"]
-[ext_resource type="Texture2D" uid="uid://j2l0get6ylkj" path="res://assets/Weapons/sword_ice.png" id="4_ev66q"]
+[ext_resource type="PackedScene" uid="uid://d61fgd4jwelo" path="res://scenes/characters/Enemies/Wolf/ghost.tscn" id="3_jpikg"]
 [ext_resource type="Texture2D" uid="uid://bd6pwojfxrqt4" path="res://assets/Dungeons Assets/effects (new)/slash_effect_anim_spritesheet.png" id="5_0xnoi"]
-[ext_resource type="Texture2D" uid="uid://br5x2hrft3ewv" path="res://assets/Dungeons Assets/heroes/knight/knight_idle_spritesheet.png" id="6_ucqae"]
+[ext_resource type="Texture2D" uid="uid://dxtd5brit3n8g" path="res://assets/Scythe.png" id="5_8h7wq"]
 [ext_resource type="Texture2D" uid="uid://bc2tt5mgylhe0" path="res://assets/Dungeons Assets/heroes/knight/knight_run_spritesheet.png" id="7_1af7v"]
+[ext_resource type="Texture2D" uid="uid://b744f06jqlrjp" path="res://assets/Dungeons Assets/heroes/HERO/MainChar_Idle.png" id="7_sc2bw"]
 [ext_resource type="Texture2D" uid="uid://k5aro64outlg" path="res://assets/Weapons/basic_gun.png" id="8_kf01r"]
 [ext_resource type="PackedScene" uid="uid://gcj1nuudnc1a" path="res://scenes/weapons.tscn" id="8_nxiak"]
 
@@ -110,46 +111,22 @@ length = 0.001
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/path = NodePath("SlashSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5708]
+"update": 1,
+"values": [false]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Sprite2D:rotation")
+tracks/1/path = NodePath("SlashSprite:frame")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [-1.5708]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SlashSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("SlashSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -159,49 +136,26 @@ tracks/3/keys = {
 [sub_resource type="Animation" id="Animation_4lgwf"]
 resource_name = "attack"
 length = 1.25
+step = 0.05
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
-tracks/0/path = NodePath("Node2D:rotation")
+tracks/0/path = NodePath("SlashSprite:visible")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.15, 0.8, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 0,
-"values": [-1.5708, 2.0944, 2.0944, -1.5708]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("Node2D/Sprite2D:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.05, 0.15, 0.8, 1.25),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
-"update": 0,
-"values": [-1.5708, 3.48787e-16, 0.174533, 0.174533, -1.5708]
-}
-tracks/2/type = "value"
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/path = NodePath("SlashSprite:visible")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/keys = {
 "times": PackedFloat32Array(0, 0.3),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [true, false]
 }
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("SlashSprite:frame")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("SlashSprite:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
 "times": PackedFloat32Array(0, 0.1, 0.2),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
@@ -214,29 +168,33 @@ _data = {
 "attack": SubResource("Animation_4lgwf")
 }
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_rwbbg"]
-atlas = ExtResource("6_ucqae")
-region = Rect2(80, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_f4t54"]
+atlas = ExtResource("7_sc2bw")
+region = Rect2(0, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_62nlv"]
-atlas = ExtResource("6_ucqae")
-region = Rect2(64, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kdp3h"]
+atlas = ExtResource("7_sc2bw")
+region = Rect2(64, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_wrm8b"]
-atlas = ExtResource("6_ucqae")
-region = Rect2(48, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_yojge"]
+atlas = ExtResource("7_sc2bw")
+region = Rect2(128, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_0but7"]
-atlas = ExtResource("6_ucqae")
-region = Rect2(32, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_23far"]
+atlas = ExtResource("7_sc2bw")
+region = Rect2(192, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_xh5do"]
-atlas = ExtResource("6_ucqae")
-region = Rect2(0, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_60e0p"]
+atlas = ExtResource("7_sc2bw")
+region = Rect2(256, 0, 64, 64)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_5ifb4"]
-atlas = ExtResource("6_ucqae")
-region = Rect2(16, 0, 16, 16)
+[sub_resource type="AtlasTexture" id="AtlasTexture_loyt5"]
+atlas = ExtResource("7_sc2bw")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_1tg3d"]
+atlas = ExtResource("7_sc2bw")
+region = Rect2(384, 0, 64, 64)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_isqfr"]
 atlas = ExtResource("7_1af7v")
@@ -266,22 +224,25 @@ region = Rect2(80, 0, 16, 16)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_rwbbg")
+"texture": SubResource("AtlasTexture_f4t54")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_62nlv")
+"texture": SubResource("AtlasTexture_kdp3h")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_wrm8b")
+"texture": SubResource("AtlasTexture_yojge")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_0but7")
+"texture": SubResource("AtlasTexture_23far")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_xh5do")
+"texture": SubResource("AtlasTexture_60e0p")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_5ifb4")
+"texture": SubResource("AtlasTexture_loyt5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_1tg3d")
 }],
 "loop": true,
 "name": &"idle",
@@ -331,7 +292,7 @@ color_ramp = SubResource("GradientTexture1D_4ppff")
 scale = Vector2(2, 2)
 collision_layer = 0
 script = ExtResource("2_as5n5")
-ghost_node = null
+ghost_node = ExtResource("3_jpikg")
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("3_cktb7")
@@ -345,18 +306,17 @@ libraries = {
 shape = SubResource("CircleShape2D_8e3cj")
 
 [node name="Sword" type="Node2D" parent="." index="3"]
-visible = false
 z_index = 2
 
 [node name="Node2D" type="Node2D" parent="Sword" index="0"]
-rotation = -1.5708
+rotation = -1.90241
 
 [node name="Sprite2D" type="Sprite2D" parent="Sword/Node2D" index="0"]
-position = Vector2(8.00001, -1.99997)
-rotation = -1.5708
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("4_ev66q")
-offset = Vector2(32, -0.27)
+z_as_relative = false
+position = Vector2(18.7788, 3.822)
+rotation = -0.0523599
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("5_8h7wq")
 
 [node name="SlashSprite" type="Sprite2D" parent="Sword" index="1"]
 visible = false
@@ -371,10 +331,12 @@ libraries = {
 
 [node name="AnimatedSprite2D" parent="." index="4"]
 texture_filter = 1
+scale = Vector2(0.5, 0.5)
 sprite_frames = SubResource("SpriteFrames_q2rym")
 animation = &"move"
 
 [node name="Weapons" parent="." index="5" instance=ExtResource("8_nxiak")]
+visible = false
 
 [node name="Node2D" type="Node2D" parent="Weapons" index="0"]
 scale = Vector2(0.2, 0.2)
@@ -387,10 +349,15 @@ position = Vector2(32, 10)
 
 [node name="GhostTimer" type="Timer" parent="." index="6"]
 wait_time = 0.15
-autostart = true
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="." index="7"]
 show_behind_parent = true
 emitting = false
 amount = 20
 process_material = SubResource("ParticleProcessMaterial_sg4yv")
+
+[node name="Camera2D" type="Camera2D" parent="." index="8"]
+drag_horizontal_enabled = true
+drag_vertical_enabled = true
+
+[connection signal="timeout" from="GhostTimer" to="." method="_on_ghost_timer_timeout"]
