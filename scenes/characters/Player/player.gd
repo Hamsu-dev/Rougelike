@@ -34,7 +34,6 @@ func _process(delta: float):
 	var elapsed_time_since_last_dash = (Time.get_ticks_msec() - last_dash_time) / 1000.0  # Convert to seconds
 	var remaining_time = max(0, DASH_COOLDOWN - elapsed_time_since_last_dash)
 	if remaining_time > 0 and Time.get_ticks_msec() - last_print_time >= 1000:  # Check if at least 1 second has passed
-		print("Time until dash is available: ", remaining_time, " seconds")
 		last_print_time = Time.get_ticks_msec()
 	
 	if dash.is_dashing():

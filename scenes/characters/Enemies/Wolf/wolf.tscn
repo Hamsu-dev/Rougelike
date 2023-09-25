@@ -1,0 +1,162 @@
+[gd_scene load_steps=17 format=3 uid="uid://cqoy6qwu1ltg8"]
+
+[ext_resource type="PackedScene" uid="uid://dtsww0ad32f22" path="res://scenes/characters/Enemies/enemy.tscn" id="1_yxjij"]
+[ext_resource type="Script" path="res://scenes/characters/Enemies/Wolf/WOLF_FiniteStateMachine.gd" id="2_bwpk2"]
+[ext_resource type="Texture2D" uid="uid://c3qv83y850m6w" path="res://assets/Dungeons Assets/enemies/Wolf/Massacre Sprite Sheet.png" id="3_31ccs"]
+[ext_resource type="PackedScene" uid="uid://cde36vwaj0j40" path="res://component/health_component.tscn" id="3_o1k7y"]
+
+[sub_resource type="Animation" id="Animation_br22k"]
+resource_name = "default"
+length = 0.6
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.1, 0.2, 0.3, 0.4, 0.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [0, 1, 2, 3, 4, 5]
+}
+
+[sub_resource type="Animation" id="Animation_fd62x"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AnimatedSprite2D:animation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [&"default"]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AnimatedSprite2D:frame")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_kp0cb"]
+_data = {
+"RESET": SubResource("Animation_fd62x"),
+"default": SubResource("Animation_br22k")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bhkq2"]
+size = Vector2(62, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kicr7"]
+size = Vector2(62, 25)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rlm8l"]
+atlas = ExtResource("3_31ccs")
+region = Rect2(0, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_b5e4e"]
+atlas = ExtResource("3_31ccs")
+region = Rect2(64, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vk5tm"]
+atlas = ExtResource("3_31ccs")
+region = Rect2(128, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h1fpu"]
+atlas = ExtResource("3_31ccs")
+region = Rect2(192, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_koxnk"]
+atlas = ExtResource("3_31ccs")
+region = Rect2(256, 0, 64, 64)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_lhjto"]
+atlas = ExtResource("3_31ccs")
+region = Rect2(320, 0, 64, 64)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_navfj"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rlm8l")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_b5e4e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vk5tm")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h1fpu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_koxnk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_lhjto")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Wolf" instance=ExtResource("1_yxjij")]
+
+[node name="FiniteStateMachine" parent="." index="0"]
+script = ExtResource("2_bwpk2")
+
+[node name="HealthComponent" parent="." index="1" instance=ExtResource("3_o1k7y")]
+
+[node name="AnimationPlayer" parent="." index="2"]
+libraries = {
+"": SubResource("AnimationLibrary_kp0cb")
+}
+
+[node name="Hurtbox" type="Area2D" parent="." index="3" groups=["Hurtbox"]]
+position = Vector2(0, 1)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
+position = Vector2(1, 19.5)
+shape = SubResource("RectangleShape2D_bhkq2")
+
+[node name="CollisionShape2D" parent="." index="4"]
+position = Vector2(1, 19.5)
+shape = SubResource("RectangleShape2D_kicr7")
+
+[node name="AnimatedSprite2D" parent="." index="5"]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_navfj")
+
+[node name="PathTimer" parent="." index="6"]
+autostart = true
+
+[node name="NavigationAgent2D" parent="." index="7"]
+debug_enabled = true
+
+[connection signal="area_entered" from="Hurtbox" to="." method="_on_area_2d_area_entered"]
+[connection signal="timeout" from="PathTimer" to="." method="_on_path_timer_timeout"]

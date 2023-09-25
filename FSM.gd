@@ -18,6 +18,7 @@ func _physics_process(delta: float) -> void:
 
 
 func _state_logic(_delta: float) -> void:
+	print("Chase")
 	pass
 
 
