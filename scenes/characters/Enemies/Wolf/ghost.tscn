@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://d61fgd4jwelo"]
+
+[ext_resource type="Texture2D" uid="uid://d165s67oyq23v" path="res://assets/Dungeons Assets/heroes/knight/knight_gray_scale.png" id="1_fo5ee"]
+[ext_resource type="Script" path="res://Ghost.gd" id="2_36lw0"]
+
+[node name="Ghost" type="Sprite2D"]
+modulate = Color(0.447059, 0.447059, 0.447059, 1)
+show_behind_parent = true
+texture = ExtResource("1_fo5ee")
+script = ExtResource("2_36lw0")

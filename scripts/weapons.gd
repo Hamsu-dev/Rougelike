@@ -3,6 +3,7 @@ extends Node2D
 @onready var marker_2d = $Node2D/Sprite2D/Marker2D
 @onready var bulletScene = preload("res://scenes/Bullet.tscn")
 var mouse_pressed = false
+
 var damage = 5
 
 func _ready():

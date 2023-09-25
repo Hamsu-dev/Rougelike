@@ -340,6 +340,8 @@ animations = [{
 }]
 
 [node name="Wolf" instance=ExtResource("1_yxjij")]
+collision_layer = 8
+collision_mask = 1
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("2_biea2")
@@ -351,10 +353,10 @@ libraries = {
 "": SubResource("AnimationLibrary_kp0cb")
 }
 
-[node name="Hurtbox" parent="." index="3" node_paths=PackedStringArray("health_component") instance=ExtResource("4_r0ufq")]
+[node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("health_component") instance=ExtResource("4_r0ufq")]
 health_component = NodePath("../HealthComponent")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Hurtbox" index="0"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtboxComponent" index="0"]
 position = Vector2(1, 19.5)
 shape = SubResource("RectangleShape2D_s0c1a")
 
@@ -368,8 +370,5 @@ sprite_frames = SubResource("SpriteFrames_navfj")
 
 [node name="PathTimer" parent="." index="6"]
 autostart = true
-
-[node name="NavigationAgent2D" parent="." index="7"]
-debug_enabled = true
 
 [connection signal="timeout" from="PathTimer" to="." method="_on_path_timer_timeout"]

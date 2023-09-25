@@ -321,36 +321,27 @@ layer_0/tile_data = PackedInt32Array(-131074, 0, 0, -65538, 0, 0, -2, 0, 0, 6553
 
 [node name="Wolf" parent="." instance=ExtResource("5_st1om")]
 position = Vector2(139, 157)
-collision_layer = 4
 
 [node name="Wolf2" parent="." instance=ExtResource("5_st1om")]
 position = Vector2(319, 161)
-collision_layer = 4
 
 [node name="Wolf3" parent="." instance=ExtResource("5_st1om")]
 position = Vector2(502, 97)
-collision_layer = 4
 
 [node name="Wolf4" parent="." instance=ExtResource("5_st1om")]
 position = Vector2(519, 191)
-collision_layer = 4
 
 [node name="Wolf5" parent="." instance=ExtResource("5_st1om")]
 position = Vector2(141, 253)
-collision_layer = 4
 
 [node name="Wolf6" parent="." instance=ExtResource("5_st1om")]
 position = Vector2(252, 88)
-collision_layer = 4
 
 [node name="Wolf7" parent="." instance=ExtResource("5_st1om")]
 position = Vector2(373, 255)
-collision_layer = 4
 
 [node name="Wolf8" parent="." instance=ExtResource("5_st1om")]
 position = Vector2(115, 42)
-collision_layer = 4
 
 [node name="Player" parent="." instance=ExtResource("2_hohol")]
 position = Vector2(343, 53)
-collision_mask = 1

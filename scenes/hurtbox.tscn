@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://scripts/hurtbox.gd" id="1_i1cnk"]
 
-[node name="Hurtbox" type="Area2D" groups=["Enemies"]]
+[node name="HurtboxComponent" type="Area2D" groups=["Enemies"]]
 position = Vector2(0, 1)
-collision_layer = 4
+collision_layer = 0
 collision_mask = 4
 script = ExtResource("1_i1cnk")

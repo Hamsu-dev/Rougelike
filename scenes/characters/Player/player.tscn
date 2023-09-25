@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://cdk8wdbansy4p"]
+[gd_scene load_steps=34 format=3 uid="uid://cdk8wdbansy4p"]
 
 [ext_resource type="PackedScene" uid="uid://bwodprm42761v" path="res://scenes/characters/character.tscn" id="1_cycg5"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_as5n5"]
@@ -9,7 +9,6 @@
 [ext_resource type="Texture2D" uid="uid://bc2tt5mgylhe0" path="res://assets/Dungeons Assets/heroes/knight/knight_run_spritesheet.png" id="7_1af7v"]
 [ext_resource type="Texture2D" uid="uid://k5aro64outlg" path="res://assets/Weapons/basic_gun.png" id="8_kf01r"]
 [ext_resource type="PackedScene" uid="uid://gcj1nuudnc1a" path="res://scenes/weapons.tscn" id="8_nxiak"]
-[ext_resource type="PackedScene" uid="uid://1m5g77c1p5vi" path="res://scenes/dash.tscn" id="10_n6wi7"]
 
 [sub_resource type="Animation" id="Animation_vwnwq"]
 length = 0.001
@@ -312,11 +311,27 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Gradient" id="Gradient_n6071"]
+colors = PackedColorArray(1, 1, 1, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4ppff"]
+gradient = SubResource("Gradient_n6071")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_sg4yv"]
+particle_flag_disable_z = true
+direction = Vector3(2.08165e-12, -1, 2.08165e-12)
+gravity = Vector3(2.08165e-12, 2.08165e-12, 2.08165e-12)
+initial_velocity_min = 10.0
+initial_velocity_max = 40.0
+orbit_velocity_min = 0.0
+orbit_velocity_max = 0.0
+color_ramp = SubResource("GradientTexture1D_4ppff")
+
 [node name="Player" instance=ExtResource("1_cycg5")]
 scale = Vector2(2, 2)
-collision_layer = 2
-collision_mask = 5
+collision_layer = 0
 script = ExtResource("2_as5n5")
+ghost_node = null
 
 [node name="FiniteStateMachine" parent="." index="0"]
 script = ExtResource("3_cktb7")
@@ -370,4 +385,12 @@ texture = ExtResource("8_kf01r")
 [node name="Marker2D" type="Marker2D" parent="Weapons/Node2D/Sprite2D" index="0"]
 position = Vector2(32, 10)
 
-[node name="Dash" parent="." index="6" instance=ExtResource("10_n6wi7")]
+[node name="GhostTimer" type="Timer" parent="." index="6"]
+wait_time = 0.15
+autostart = true
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="." index="7"]
+show_behind_parent = true
+emitting = false
+amount = 20
+process_material = SubResource("ParticleProcessMaterial_sg4yv")
