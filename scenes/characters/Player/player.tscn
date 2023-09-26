@@ -306,6 +306,7 @@ libraries = {
 shape = SubResource("CircleShape2D_8e3cj")
 
 [node name="Sword" type="Node2D" parent="." index="3"]
+visible = false
 z_index = 2
 
 [node name="Node2D" type="Node2D" parent="Sword" index="0"]
