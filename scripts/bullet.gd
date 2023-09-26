@@ -17,8 +17,6 @@ func _on_timer_timeout():
 func _on_body_entered(body):
 	if body is Barrel:
 		body.destroy_barrel()
-	elif body.has_node("HitboxComponent"):
-		var hitbox = body.get_node("HitboxComponent")
-		hitbox.knockback_direction = direction # Set the direction of knockback
-		hitbox._on_body_entered(body) # Apply damage
-	queue_free()
+	elif body.has_method("take_damage"):
+		body.take_damage(hitbox_component.damage, hitbox_component.knockback_direction, hitbox_component.knockback_force)
+

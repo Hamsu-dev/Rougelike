@@ -1,7 +1,7 @@
 extends Area2D
 class_name HitboxComponent
 
-@export var damage = 1
+var damage = 0
 @export var knockback_force: int = 300
 @onready var collision_shape_2d = $CollisionShape2D
 

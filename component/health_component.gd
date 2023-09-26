@@ -16,4 +16,3 @@ func damage(damage_amount: float):
 	emit_signal("took_damage", current_health)
 	if current_health == 0:
 		died.emit()
-		owner.queue_free()

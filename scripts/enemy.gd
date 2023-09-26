@@ -8,9 +8,8 @@ class_name Enemies
 @onready var health_component: HealthComponent = $HealthComponent
 
 func _ready():
-	print("signal")
 	health_component.took_damage.connect(_on_took_damage)
-
+	animated_sprite.animation_finished.connect(_on_animation_player_animation_finished)
 
 func chase() -> void:
 	if not navigation_agent.is_target_reached():
@@ -40,4 +39,11 @@ func _on_took_damage(current_health: float):
 	if current_health > 0:
 		animated_sprite.play("hurt")
 	else:
+		animated_sprite.stop()
 		animated_sprite.play("die")
+		print("Trying to play die animation")
+
+
+func _on_animation_player_animation_finished(animation_name: String):
+	if animation_name == "die":
+		queue_free() 
