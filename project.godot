@@ -68,6 +68,10 @@ dash={
 2d_physics/layer_5="Destrucables"
 2d_physics/layer_6="Collectives"
 
+[physics]
+
+2d/default_gravity_vector=Vector2(2.08165e-12, 2.08165e-12)
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
