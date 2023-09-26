@@ -7,6 +7,10 @@ class_name Enemies
 @onready var navigation_agent: NavigationAgent2D = get_node('NavigationAgent2D')
 @onready var health_component: HealthComponent = $HealthComponent
 
+func _ready():
+	print("signal")
+	health_component.took_damage.connect(_on_took_damage)
+
 
 func chase() -> void:
 	if not navigation_agent.is_target_reached():
@@ -30,3 +34,10 @@ func _on_path_timer_timeout():
 	else:
 		path_timer.stop()
 		move_direction = Vector2.ZERO
+
+func _on_took_damage(current_health: float):
+	print(current_health)
+	if current_health > 0:
+		animated_sprite.play("hurt")
+	else:
+		animated_sprite.play("die")
