@@ -9,6 +9,7 @@ class_name Player
 @onready var gun1_sprite = $Weapons/Node2D/Sprite2D
 @onready var sword: Node2D = get_node('Sword')
 @onready var sword_animation_player: AnimationPlayer = sword.get_node('SwordAnimationPlayer')
+@onready var hitbox_component = $Sword/Node2D/Sprite2D/HitboxComponent
 
 
 const GUN2_OFFSET = Vector2(-30, 0)  # Adjust these values as needed
@@ -36,6 +37,7 @@ func _process(delta: float):
 
 
 	sword.rotation = mouse_direction.angle()
+	hitbox_component.knockback_direction = mouse_direction
 	if sword.scale.y == 1 and mouse_direction.x < 0:
 		sword.scale.y = -1
 	elif sword.scale.y == -1 and mouse_direction.x > 0:

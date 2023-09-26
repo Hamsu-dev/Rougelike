@@ -3,6 +3,7 @@ extends CharacterBody2D
 class_name Character
 
 const FRICTION: float = 0.15
+@export var hp: int = 10
 @export var acceleration: int = 40
 @export var max_speed: int = 100
 
@@ -21,3 +22,9 @@ func move():
 	move_direction = move_direction.normalized() 
 	velocity += move_direction * acceleration
 	velocity = velocity.limit_length(max_speed)
+
+
+func take_damage(dam: int, dir: Vector2, force: int) -> void:
+	hp -= dam
+	state_machine.set_state(state_machine.states.hurt)
+	velocity += dir * force

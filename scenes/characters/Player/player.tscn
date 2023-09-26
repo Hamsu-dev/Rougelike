@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://cdk8wdbansy4p"]
+[gd_scene load_steps=38 format=3 uid="uid://cdk8wdbansy4p"]
 
 [ext_resource type="PackedScene" uid="uid://bwodprm42761v" path="res://scenes/characters/character.tscn" id="1_cycg5"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_as5n5"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://d61fgd4jwelo" path="res://scenes/characters/Enemies/Wolf/ghost.tscn" id="3_jpikg"]
 [ext_resource type="Texture2D" uid="uid://bd6pwojfxrqt4" path="res://assets/Dungeons Assets/effects (new)/slash_effect_anim_spritesheet.png" id="5_0xnoi"]
 [ext_resource type="Texture2D" uid="uid://dxtd5brit3n8g" path="res://assets/Weapons/Scythe.png" id="5_7ktka"]
+[ext_resource type="Script" path="res://scripts/HitboxComponent.gd.gd" id="6_gxjxi"]
 [ext_resource type="Texture2D" uid="uid://bc2tt5mgylhe0" path="res://assets/Dungeons Assets/heroes/knight/knight_run_spritesheet.png" id="7_1af7v"]
 [ext_resource type="Texture2D" uid="uid://b744f06jqlrjp" path="res://assets/Dungeons Assets/heroes/HERO/MainChar_Idle.png" id="7_sc2bw"]
 [ext_resource type="Texture2D" uid="uid://k5aro64outlg" path="res://assets/Weapons/basic_gun.png" id="8_kf01r"]
@@ -106,6 +107,9 @@ _data = {
 [sub_resource type="CircleShape2D" id="CircleShape2D_8e3cj"]
 radius = 4.28
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_k7cfa"]
+size = Vector2(14.6689, 39.8356)
+
 [sub_resource type="Animation" id="Animation_kujel"]
 length = 0.001
 tracks/0/type = "value"
@@ -139,6 +143,18 @@ tracks/2/path = NodePath("Node2D/SlashSprite:visible")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node2D/Sprite2D/HitboxComponent/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -184,6 +200,18 @@ tracks/2/keys = {
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 1,
 "values": [false, true, false]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Node2D/Sprite2D/HitboxComponent/CollisionShape2D:disabled")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.133333),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y3wy5"]
@@ -342,6 +370,16 @@ scale = Vector2(0.5, 0.5)
 texture = ExtResource("5_7ktka")
 offset = Vector2(26.2611, -14.5311)
 
+[node name="HitboxComponent" type="Area2D" parent="Sword/Node2D/Sprite2D" index="0"]
+collision_layer = 8
+collision_mask = 4
+script = ExtResource("6_gxjxi")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Sword/Node2D/Sprite2D/HitboxComponent" index="0"]
+position = Vector2(47.512, -12.0963)
+rotation = -0.391534
+shape = SubResource("RectangleShape2D_k7cfa")
+
 [node name="SlashSprite" type="Sprite2D" parent="Sword/Node2D" index="1"]
 visible = false
 position = Vector2(-6.99974, 20.3286)
@@ -362,7 +400,6 @@ sprite_frames = SubResource("SpriteFrames_q2rym")
 animation = &"move"
 
 [node name="Weapons" parent="." index="5" instance=ExtResource("8_nxiak")]
-visible = false
 
 [node name="Node2D" type="Node2D" parent="Weapons" index="0"]
 scale = Vector2(0.2, 0.2)
