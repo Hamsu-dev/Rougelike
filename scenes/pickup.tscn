@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://dfmr88bmh030n"]
+
+[ext_resource type="Script" path="res://pickup.gd" id="1_pd3hq"]
+[ext_resource type="Texture2D" uid="uid://bimyr1ajosokb" path="res://assets/Dungeons Assets/props_itens/bag_coins.png" id="1_w3yfe"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8wvat"]
+size = Vector2(12, 7)
+
+[node name="Pickup" type="Area2D"]
+script = ExtResource("1_pd3hq")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_w3yfe")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1.5)
+shape = SubResource("RectangleShape2D_8wvat")

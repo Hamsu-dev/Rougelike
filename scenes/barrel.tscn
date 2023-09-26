@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://02gdv4fvdy2v"]
+
+[ext_resource type="Script" path="res://barrel.gd" id="1_0c4cf"]
+[ext_resource type="Texture2D" uid="uid://dn0tqdp5bt54" path="res://assets/Dungeons Assets/props_itens/barrel.png" id="1_uv0yy"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_r7fuw"]
+radius = 5.0
+height = 16.0
+
+[node name="barrel" type="RigidBody2D"]
+collision_layer = 16
+collision_mask = 9
+script = ExtResource("1_0c4cf")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_uv0yy")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_r7fuw")

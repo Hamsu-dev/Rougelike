@@ -1,5 +1,6 @@
 @icon("res://assets/Dungeons Assets/heroes/knight/knight_idle_anim_f0.png")
 extends Character
+class_name Player
 
 @export var ghost_node : PackedScene
 @onready var ghost_timer = $GhostTimer

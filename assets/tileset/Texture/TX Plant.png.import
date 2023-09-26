@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dxtd5brit3n8g"
-path="res://.godot/imported/Scythe.png-0624445c37edeb3467519012832b35b5.ctex"
+uid="uid://w4tniqx5h2bi"
+path="res://.godot/imported/TX Plant.png-09f65b1be22967870770076447cf59c0.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/Scythe.png"
-dest_files=["res://.godot/imported/Scythe.png-0624445c37edeb3467519012832b35b5.ctex"]
+source_file="res://assets/tileset/Texture/TX Plant.png"
+dest_files=["res://.godot/imported/TX Plant.png-09f65b1be22967870770076447cf59c0.ctex"]
 
 [params]
 

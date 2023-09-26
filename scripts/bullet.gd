@@ -1,4 +1,4 @@
-extends CharacterBody2D
+extends Area2D
 class_name Bullet
 
 @onready var hitbox_component: HitboxComponent = $HitboxComponent
@@ -7,9 +7,7 @@ const speed = 600
 var direction = Vector2.ZERO
 	
 func _process(delta):
-	var collisionResult = move_and_collide(direction * speed * delta)
-	if collisionResult != null:
-		queue_free()
+		position += direction.normalized() * speed * delta
 
 func _on_timer_timeout():
 	queue_free()
