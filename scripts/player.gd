@@ -10,9 +10,14 @@ class_name Player
 @onready var sword: Node2D = get_node('Sword')
 @onready var sword_animation_player: AnimationPlayer = sword.get_node('SwordAnimationPlayer')
 
+
 const GUN2_OFFSET = Vector2(-30, 0)  # Adjust these values as needed
 const MAX_SPEED = 60  # Adjust the speed as needed
 const GUN_RADIUS = 10 # Adjust the radius of the circular range
+
+
+func _ready():
+	sword.visible = false
 
 
 func _process(delta: float):
@@ -24,15 +29,19 @@ func _process(delta: float):
 		animated_sprite.flip_h = false
 	elif mouse_direction.x < 0 and not animated_sprite.flip_h:
 		animated_sprite.flip_h = true
-	if Input.is_action_just_pressed('attack') and not sword_animation_player.is_playing():
-		sword_animation_player.play('attack')
+	if Input.is_action_just_pressed('melee') and not sword_animation_player.is_playing():
+		sword.visible = true
+		sword_animation_player.play('melee')
+		sword_animation_player.animation_finished.connect(_on_sword_animation_player_animation_finished)
+
 
 	sword.rotation = mouse_direction.angle()
 	if sword.scale.y == 1 and mouse_direction.x < 0:
 		sword.scale.y = -1
 	elif sword.scale.y == -1 and mouse_direction.x > 0:
 		sword.scale.y = 1
-
+		
+		
 func get_input():
 	move_direction = Vector2.ZERO
 	move_direction.x = Input.get_axis("left", "right")
@@ -81,3 +90,8 @@ func _input(event):
 
 	if event.is_action_pressed("dash"):
 		dash()
+
+
+func _on_sword_animation_player_animation_finished(animation_name: String):
+	if animation_name == "melee":
+		sword.visible = false
