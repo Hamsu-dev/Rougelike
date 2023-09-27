@@ -16,9 +16,8 @@ var mouse_pressed = false
 const GUN_RADIUS = 10 # Adjust the radius of the circular range
 
 func _ready():
-	# Load properties from the GunData resource
 	if gun_data:
-		current_ammo = gun_data.ammo_capacity
+		current_ammo = gun_data.gun_properties.ammo_capacity
 	else:
 		print("Warning: gun_data is not assigned!")
 
@@ -48,7 +47,7 @@ func _unhandled_input(_event):
 			current_ammo -= 1
 
 		mouse_pressed = false
-		hud.update_ammo(current_ammo, gun_data.ammo_capacity)
+		hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
 
 	if Input.is_action_just_released('reload') and not is_reloading:
 		start_reloading()
@@ -58,15 +57,15 @@ func shoot_bullet():
 	var bullet = bulletScene.instantiate() as Bullet
 	var root = get_tree().get_root() 
 	root.add_child(bullet)
-	bullet.hitbox_component.damage = gun_data.damage
+	bullet.hitbox_component.damage = gun_data.gun_properties.damage
 	bullet.global_position = marker_2d.global_position
 	bullet.direction = (get_global_mouse_position() - global_position).normalized()
 	bullet.rotation = bullet.direction.angle()
 
 func start_reloading():
 	is_reloading = true
-	await get_tree().create_timer(gun_data.reload_time).timeout
-	current_ammo = gun_data.ammo_capacity
+	await get_tree().create_timer(gun_data.gun_properties.reload_time).timeout
+	current_ammo = gun_data.gun_properties.ammo_capacity
 	is_reloading = false
-	hud.update_ammo(current_ammo, gun_data.ammo_capacity)
+	hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
 	hud.hide_reloading()

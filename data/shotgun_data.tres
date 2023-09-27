@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="GunData" load_steps=2 format=3 uid="uid://tl7r5x70183y"]
+
+[ext_resource type="Script" path="res://data/GunData.gd" id="1_y2sna"]
+
+[resource]
+script = ExtResource("1_y2sna")
+gun_name = "Default Gun"
+damage = 2
+ammo_capacity = 30
+reload_time = 2.0

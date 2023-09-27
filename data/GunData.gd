@@ -1,8 +1,19 @@
 extends Resource
 class_name GunData
 
-# Define gun properties
-@export var gun_name: String = "Default Gun"
-@export var damage: int = 2
-@export var ammo_capacity: int = 30
-@export var reload_time: float = 2.0
+# Default gun properties
+class DefaultGunProperties:
+	var gun_name: String = "Default Gun"
+	var damage: int = 2
+	var ammo_capacity: int = 10
+	var reload_time: float = 2.0
+
+# Shotgun properties
+class ShotgunProperties:
+	var gun_name: String = "Shotgun"
+	var damage: int = 10
+	var ammo_capacity: int = 8
+	var reload_time: float = 3.5
+
+# Instantiate the default gun properties by default
+var gun_properties = DefaultGunProperties.new()
