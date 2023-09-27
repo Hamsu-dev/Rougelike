@@ -21,7 +21,7 @@ func _ready():
 	else:
 		print("Warning: gun_data is not assigned!")
 
-func _process(delta):
+func _process(_delta):
 	var mouse_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
 	rotation = mouse_direction.angle()
 

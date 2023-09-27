@@ -39,6 +39,9 @@ func _process(delta: float):
 	elif sword.scale.y == -1 and mouse_direction.x > 0:
 		sword.scale.y = 1
 		
+	if Input.is_action_pressed("dash"):
+		dash()
+	weapon_manager.handle_input()
 		
 func get_input():
 	move_direction = Vector2.ZERO
@@ -65,12 +68,6 @@ func dash():
 	await tween.finished
 	ghost_timer.stop()
 	particles.emitting = false
-
-
-func _input(event):
-	if Input.is_action_pressed("dash"):
-		dash()
-	weapon_manager.handle_input()
 
 
 func _on_sword_animation_player_animation_finished(anim_name):

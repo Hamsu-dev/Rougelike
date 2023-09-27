@@ -19,7 +19,7 @@ func _ready():
 	current_ammo = gun_data.gun_properties.ammo_capacity
 	hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)  # Update ammo count on HUD on initialization
 
-func _process(delta):
+func _process(_delta):
 	var mouse_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
 	rotation = mouse_direction.angle()
 
@@ -36,23 +36,21 @@ func _process(delta):
 
 
 func shoot_shotgun():
-	if current_ammo > 0:
-		current_ammo -= 1
-		hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
-	elif current_ammo < 0 or current_ammo == 0:
-		start_reloading()
-		
-	for i in range(SHOTGUN_PELLETS):
-		var bullet = bulletScene.instantiate()
-		get_parent().add_child(bullet)
+	if current_ammo > 0:	
+		for i in range(SHOTGUN_PELLETS):
+			var bullet = bulletScene.instantiate() as Bullet
+			get_parent().add_child(bullet)
 
-		# Calculate direction with a random spread
-		var random_angle = deg_to_rad(randf() * SHOTGUN_SPREAD - SHOTGUN_SPREAD / 2)
-		var direction = (get_global_mouse_position() - global_position).rotated(random_angle).normalized()
+			# Calculate direction with a random spread
+			var random_angle = deg_to_rad(randf() * SHOTGUN_SPREAD - SHOTGUN_SPREAD / 2)
+			var direction = (get_global_mouse_position() - global_position).rotated(random_angle).normalized()
 
-		bullet.global_position = shot_gun_marker_2d.global_position
-		bullet.direction = direction
-		bullet.hitbox_component.damage = gun_data.gun_properties.damage
+			bullet.global_position = shot_gun_marker_2d.global_position
+			bullet.direction = direction
+			bullet.hitbox_component.damage = gun_data.gun_properties.damage
+			current_ammo -= 1
+			hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
+
 
 func start_reloading():
 	is_reloading = true
