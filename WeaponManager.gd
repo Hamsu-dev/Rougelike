@@ -41,10 +41,12 @@ func set_current_weapon(weapon: Node2D):
 
 func switch_to_next_weapon():
 	var index = weapons.find(current_weapon)
+	
+	
 	if index != -1:
 		current_weapon.hide()
 	index = (index + 1) % weapons.size()
 	current_weapon = weapons[index]
 	current_weapon.show()
-	print("Switched to: ", current_weapon.name)
+	hud.update_ammo(current_weapon.current_ammo, current_weapon.gun_data.gun_properties.ammo_capacity)	
 

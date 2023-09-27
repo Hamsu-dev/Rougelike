@@ -406,7 +406,6 @@ animation = &"move"
 script = ExtResource("5_h0uij")
 
 [node name="BaseGun" parent="WeaponManager" index="0" instance=ExtResource("8_nxiak")]
-visible = false
 scale = Vector2(2, 2)
 
 [node name="Node2D" type="Node2D" parent="WeaponManager/BaseGun" index="0"]

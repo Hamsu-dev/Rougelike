@@ -34,14 +34,14 @@ func _process(delta):
 	elif get_global_mouse_position().x > shot_gun_2d.global_position.x:
 		shot_gun_2d.scale = Vector2(1, 1)
 
-func fire():
-	if not is_reloading and current_ammo > 0:
-		shoot_shotgun()
-		current_ammo -= 1
-		hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
-
 
 func shoot_shotgun():
+	if current_ammo > 0:
+		current_ammo -= 1
+		hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
+	elif current_ammo < 0 or current_ammo == 0:
+		start_reloading()
+		
 	for i in range(SHOTGUN_PELLETS):
 		var bullet = bulletScene.instantiate()
 		get_parent().add_child(bullet)
