@@ -92,8 +92,8 @@ func _input(event):
 
 	if event.is_action_pressed("dash"):
 		dash()
-
-
-func _on_sword_animation_player_animation_finished(animation_name: String):
-	if animation_name == "melee":
+		
+		
+func _on_sword_animation_player_animation_finished(anim_name):
+	if anim_name == "melee":
 		sword.visible = false

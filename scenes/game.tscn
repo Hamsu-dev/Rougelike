@@ -1,5 +1,6 @@
-[gd_scene load_steps=15 format=3 uid="uid://dyltvp5sysv2p"]
+[gd_scene load_steps=16 format=3 uid="uid://dyltvp5sysv2p"]
 
+[ext_resource type="PackedScene" uid="uid://n0h6r8oyip5r" path="res://hud.tscn" id="1_8chfp"]
 [ext_resource type="Texture2D" uid="uid://bi2u8laf3emeh" path="res://assets/Dungeons Assets/tiles/floor/floor_10.png" id="1_kbqte"]
 [ext_resource type="Texture2D" uid="uid://dvmf2hgxt8gaw" path="res://assets/Dungeons Assets/full tilemap.png" id="2_3r0mb"]
 [ext_resource type="PackedScene" uid="uid://cdk8wdbansy4p" path="res://scenes/characters/Player/player.tscn" id="2_hohol"]
@@ -3552,6 +3553,8 @@ sources/3 = SubResource("TileSetScenesCollectionSource_drrjo")
 sources/4 = SubResource("TileSetAtlasSource_tg0i0")
 
 [node name="Game" type="Node"]
+
+[node name="HUD" parent="." instance=ExtResource("1_8chfp")]
 
 [node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
 position = Vector2(0, -1)

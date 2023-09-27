@@ -1,0 +1,17 @@
+[gd_scene load_steps=2 format=3 uid="uid://n0h6r8oyip5r"]
+
+[ext_resource type="Script" path="res://HUD.gd" id="1_ghqp7"]
+
+[node name="HUD" type="CanvasLayer"]
+script = ExtResource("1_ghqp7")
+
+[node name="AmmoLabel" type="Label" parent="."]
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Ammo: 10/10"
+
+[node name="ReloadLabel" type="Label" parent="."]
+visible = false
+offset_right = 40.0
+offset_bottom = 23.0
+text = "Reloading..."
