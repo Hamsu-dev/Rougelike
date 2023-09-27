@@ -19,4 +19,5 @@ func _on_body_entered(body):
 		body.destroy_barrel()
 	elif body.has_method("take_damage"):
 		body.take_damage(hitbox_component.damage, hitbox_component.knockback_direction, hitbox_component.knockback_force)
+		queue_free()
 
