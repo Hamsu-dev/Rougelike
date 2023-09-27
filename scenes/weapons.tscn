@@ -1,8 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://gcj1nuudnc1a"]
+[gd_scene load_steps=2 format=3 uid="uid://gcj1nuudnc1a"]
 
 [ext_resource type="Script" path="res://scripts/weapons.gd" id="1_5h72e"]
-[ext_resource type="Resource" uid="uid://cn82oww4vuwt0" path="res://data/default_gun.tres" id="2_ne64d"]
 
 [node name="Weapons" type="Node2D"]
 script = ExtResource("1_5h72e")
-gun_data = ExtResource("2_ne64d")
+damage = 1
