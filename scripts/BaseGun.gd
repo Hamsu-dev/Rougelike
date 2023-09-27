@@ -1,12 +1,11 @@
 extends Node2D
 class_name BaseGun
 
-@onready var marker_2d = $Node2D/Sprite2D/Marker2D
 @onready var bulletScene = preload("res://scenes/Bullet.tscn")
 @export var gun_data: GunData
 @onready var hud = get_tree().get_root().get_node("Game/HUD")
-@onready var gun_sprite = $Node2D/Sprite2D
-
+@onready var gun_sprite = $Node2D/BaseGun2D
+@onready var base_gun_marker_2d = $Node2D/BaseGun2D/BaseGunMarker2D
 
 
 var current_ammo: int
@@ -18,6 +17,7 @@ const GUN_RADIUS = 10 # Adjust the radius of the circular range
 func _ready():
 	if gun_data:
 		current_ammo = gun_data.gun_properties.ammo_capacity
+		hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)  # Update ammo count on HUD on initialization
 	else:
 		print("Warning: gun_data is not assigned!")
 
@@ -37,35 +37,27 @@ func _process(delta):
 		gun_sprite.scale = Vector2(1, 1)
 
 
-func _unhandled_input(_event):
-	if Input.is_action_pressed('attack') and not is_reloading:
-		mouse_pressed = true
-
-	if Input.is_action_just_released('attack') and mouse_pressed and not is_reloading:
-		if current_ammo > 0:
-			shoot_bullet()
-			current_ammo -= 1
-
-		mouse_pressed = false
+func shoot_bullet():
+	if current_ammo > 0:
+		var bullet = bulletScene.instantiate() as Bullet
+		var root = get_tree().get_root() 
+		root.add_child(bullet)
+		bullet.global_position = get_bullet_spawn_position()
+		bullet.hitbox_component.damage = gun_data.gun_properties.damage
+		bullet.direction = (get_global_mouse_position() - global_position).normalized()
+		bullet.rotation = bullet.direction.angle()
+		current_ammo -= 1
 		hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
 
-	if Input.is_action_just_released('reload') and not is_reloading:
-		start_reloading()
-		hud.show_reloading()
-		
-func shoot_bullet():
-	var bullet = bulletScene.instantiate() as Bullet
-	var root = get_tree().get_root() 
-	root.add_child(bullet)
-	bullet.hitbox_component.damage = gun_data.gun_properties.damage
-	bullet.global_position = marker_2d.global_position
-	bullet.direction = (get_global_mouse_position() - global_position).normalized()
-	bullet.rotation = bullet.direction.angle()
+
+func get_bullet_spawn_position():
+	return base_gun_marker_2d.global_position
+
 
 func start_reloading():
 	is_reloading = true
 	await get_tree().create_timer(gun_data.gun_properties.reload_time).timeout
 	current_ammo = gun_data.gun_properties.ammo_capacity
 	is_reloading = false
-	hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
+	hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)  # Update ammo count on HUD after reloading
 	hud.hide_reloading()

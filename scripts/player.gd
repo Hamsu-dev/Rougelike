@@ -5,11 +5,12 @@ class_name Player
 @export var ghost_node : PackedScene
 @onready var ghost_timer = $GhostTimer
 @onready var particles = $GPUParticles2D
-@onready var base_gun: Node2D = $WeaponManager/BaseGun # Reference to the BaseGun node
+@onready var base_gun: Node2D = $WeaponManager/BaseGun/Node2D/BaseGun2D
 @onready var sword: Node2D = get_node('Sword')
 @onready var sword_animation_player: AnimationPlayer = sword.get_node('SwordAnimationPlayer')
 @onready var hitbox_component = $Sword/Node2D/Sprite2D/HitboxComponent
 @onready var weapon_manager = $WeaponManager
+@onready var shotgun: Node2D = $WeaponManager/Shotgun
 
 
 const MAX_SPEED = 60  # Adjust the speed as needed
@@ -69,11 +70,9 @@ func dash():
 func _input(event):
 	if Input.is_action_pressed("dash"):
 		dash()
-	elif Input.is_action_just_pressed('attack'):
-		base_gun._unhandled_input(event)  # Delegate shooting logic to BaseGun
-	if Input.is_action_just_pressed("switch_weapon"):
-		weapon_manager.switch_to_next_weapon()
-		
+	weapon_manager.handle_input()
+
+
 func _on_sword_animation_player_animation_finished(anim_name):
 	if anim_name == "melee":
 		sword.visible = false

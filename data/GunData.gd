@@ -12,7 +12,7 @@ class DefaultGunProperties:
 class ShotgunProperties:
 	var gun_name: String = "Shotgun"
 	var damage: int = 10
-	var ammo_capacity: int = 8
+	var ammo_capacity: int = 2
 	var reload_time: float = 3.5
 
 # Instantiate the default gun properties by default

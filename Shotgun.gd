@@ -1,24 +1,63 @@
 extends Node2D
+class_name Shotgun
+
+@onready var bulletScene = preload("res://scenes/Bullet.tscn")
+@export var gun_data: GunData
+@onready var hud = get_tree().get_root().get_node("Game/HUD")
+@onready var shot_gun_2d = $Node2D/ShotGun2D
+@onready var shot_gun_marker_2d = $Node2D/ShotGun2D/ShotGunMarker2D
+
+var current_ammo: int
+var is_reloading: bool = false
+
+const GUN_RADIUS = 10  # Same as BaseGun
+const SHOTGUN_SPREAD = 30.0
+const SHOTGUN_PELLETS = 6
 
 func _ready():
-	# Get the GunData resource
-	var gun_data = preload("res://data/GunData.gd").instance()
+	gun_data.gun_properties = gun_data.ShotgunProperties.new()  # Set the gun data to ShotgunProperties
+	current_ammo = gun_data.gun_properties.ammo_capacity
+	hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)  # Update ammo count on HUD on initialization
 
-	# Check if it's a ShotgunProperties instance
-	if gun_data is GunData.ShotgunProperties:
-		# Cast it to the ShotgunProperties class
-		var shotgun_properties = gun_data as GunData.ShotgunProperties
+func _process(delta):
+	var mouse_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
+	rotation = mouse_direction.angle()
 
-		# Now you can access the shotgun's properties and use them as needed
-		var shotgun_name = shotgun_properties.gun_name
-		var shotgun_damage = shotgun_properties.damage
-		var shotgun_ammo_capacity = shotgun_properties.ammo_capacity
-		var shotgun_reload_time = shotgun_properties.reload_time
+	# Calculate the weapon position within the circular range
+	var gun_position = global_position + mouse_direction * GUN_RADIUS
+	shot_gun_2d.global_position = gun_position
+	shot_gun_2d.look_at(get_global_mouse_position())
 
-		# You can also print these values to verify
-		print("Shotgun Name:", shotgun_name)
-		print("Shotgun Damage:", shotgun_damage)
-		print("Shotgun Ammo Capacity:", shotgun_ammo_capacity)
-		print("Shotgun Reload Time:", shotgun_reload_time)
-	else:
-		print("This gun is not a shotgun.")
+	# Adjust the sprite scaling based on the mouse position relative to the shotgun sprite
+	if get_global_mouse_position().x < shot_gun_2d.global_position.x:
+		shot_gun_2d.scale = Vector2(1, -1)
+	elif get_global_mouse_position().x > shot_gun_2d.global_position.x:
+		shot_gun_2d.scale = Vector2(1, 1)
+
+func fire():
+	if not is_reloading and current_ammo > 0:
+		shoot_shotgun()
+		current_ammo -= 1
+		hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
+
+
+func shoot_shotgun():
+	for i in range(SHOTGUN_PELLETS):
+		var bullet = bulletScene.instantiate()
+		get_parent().add_child(bullet)
+
+		# Calculate direction with a random spread
+		var random_angle = deg_to_rad(randf() * SHOTGUN_SPREAD - SHOTGUN_SPREAD / 2)
+		var direction = (get_global_mouse_position() - global_position).rotated(random_angle).normalized()
+
+		bullet.global_position = shot_gun_marker_2d.global_position
+		bullet.direction = direction
+		bullet.hitbox_component.damage = gun_data.gun_properties.damage
+
+func start_reloading():
+	is_reloading = true
+	await get_tree().create_timer(gun_data.gun_properties.reload_time).timeout
+	current_ammo = gun_data.gun_properties.ammo_capacity
+	is_reloading = false
+	hud.update_ammo(current_ammo, gun_data.gun_properties.ammo_capacity)
+	hud.hide_reloading()

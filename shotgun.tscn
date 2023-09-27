@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://diyvo2wf8v731"]
+[gd_scene load_steps=3 format=3 uid="uid://diyvo2wf8v731"]
 
 [ext_resource type="Script" path="res://Shotgun.gd" id="1_d1i55"]
+[ext_resource type="Resource" uid="uid://tl7r5x70183y" path="res://data/shotgun_data.tres" id="2_usekg"]
 
 [node name="Shotgun" type="Node2D"]
 script = ExtResource("1_d1i55")
+gun_data = ExtResource("2_usekg")

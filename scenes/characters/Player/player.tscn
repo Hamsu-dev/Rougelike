@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://cdk8wdbansy4p"]
+[gd_scene load_steps=41 format=3 uid="uid://cdk8wdbansy4p"]
 
 [ext_resource type="PackedScene" uid="uid://bwodprm42761v" path="res://scenes/characters/character.tscn" id="1_cycg5"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="2_as5n5"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://k5aro64outlg" path="res://assets/Weapons/basic_gun.png" id="8_kf01r"]
 [ext_resource type="PackedScene" uid="uid://gcj1nuudnc1a" path="res://scenes/BaseGun.tscn" id="8_nxiak"]
 [ext_resource type="Texture2D" uid="uid://2wv81tktdcex" path="res://assets/MainChar_Walk.png" id="9_8note"]
+[ext_resource type="PackedScene" uid="uid://diyvo2wf8v731" path="res://shotgun.tscn" id="13_gixfy"]
+[ext_resource type="Texture2D" uid="uid://c5unrd2nru0w" path="res://assets/Weapons/Shotgun.png" id="14_qcx0s"]
 
 [sub_resource type="Animation" id="Animation_vwnwq"]
 length = 0.001
@@ -404,16 +406,31 @@ animation = &"move"
 script = ExtResource("5_h0uij")
 
 [node name="BaseGun" parent="WeaponManager" index="0" instance=ExtResource("8_nxiak")]
+visible = false
 scale = Vector2(2, 2)
 
 [node name="Node2D" type="Node2D" parent="WeaponManager/BaseGun" index="0"]
 scale = Vector2(0.1, 0.1)
 
-[node name="Sprite2D" type="Sprite2D" parent="WeaponManager/BaseGun/Node2D" index="0"]
+[node name="BaseGun2D" type="Sprite2D" parent="WeaponManager/BaseGun/Node2D" index="0"]
 texture = ExtResource("8_kf01r")
 
-[node name="Marker2D" type="Marker2D" parent="WeaponManager/BaseGun/Node2D/Sprite2D" index="0"]
+[node name="BaseGunMarker2D" type="Marker2D" parent="WeaponManager/BaseGun/Node2D/BaseGun2D" index="0"]
 position = Vector2(32, 10)
+
+[node name="Shotgun" parent="WeaponManager" index="1" instance=ExtResource("13_gixfy")]
+
+[node name="Node2D" type="Node2D" parent="WeaponManager/Shotgun" index="0"]
+position = Vector2(8.5, -3)
+scale = Vector2(0.25, 0.25)
+
+[node name="ShotGun2D" type="Sprite2D" parent="WeaponManager/Shotgun/Node2D" index="0"]
+position = Vector2(0, 30)
+scale = Vector2(2.6, 2.6)
+texture = ExtResource("14_qcx0s")
+
+[node name="ShotGunMarker2D" type="Marker2D" parent="WeaponManager/Shotgun/Node2D/ShotGun2D" index="0"]
+position = Vector2(27.838, -3.896)
 
 [node name="GhostTimer" type="Timer" parent="." index="6"]
 wait_time = 0.15

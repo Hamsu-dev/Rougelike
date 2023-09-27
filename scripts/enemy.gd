@@ -35,13 +35,11 @@ func _on_path_timer_timeout():
 		move_direction = Vector2.ZERO
 
 func _on_took_damage(current_health: float):
-	print(current_health)
 	if current_health > 0:
 		animated_sprite.play("hurt")
 	else:
 		animated_sprite.stop()
 		animated_sprite.play("die")
-		print("Trying to play die animation")
 
 
 func _on_animation_player_animation_finished(animation_name: String):
