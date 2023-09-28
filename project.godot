@@ -17,6 +17,8 @@ config/icon="res://icon.svg"
 
 [display]
 
+window/size/viewport_width=3440
+window/size/viewport_height=1440
 window/size/window_width_override=1920
 window/size/window_height_override=1080
 window/stretch/mode="viewport"
@@ -85,6 +87,7 @@ enter={
 2d_physics/layer_4="Weapons"
 2d_physics/layer_5="Destrucables"
 2d_physics/layer_6="Collectives"
+2d_physics/layer_7="Interactables"
 
 [physics]
 

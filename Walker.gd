@@ -47,7 +47,6 @@ func change_direction():
 	while not borders.has_point(position + direction):
 		direction = directions.pop_front()
 
-
 func create_room(position, size):
 	return {position = position, size = size}
 

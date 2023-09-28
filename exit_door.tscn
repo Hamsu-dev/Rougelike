@@ -6,6 +6,8 @@
 size = Vector2(28, 27)
 
 [node name="ExitDoor" type="Area2D"]
+collision_layer = 64
+collision_mask = 2
 script = ExtResource("1_n52s0")
 
 [node name="ColorRect" type="ColorRect" parent="."]
