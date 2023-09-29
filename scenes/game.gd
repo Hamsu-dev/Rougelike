@@ -22,7 +22,6 @@ func generate_level():
 	add_child(exit)
 	exit.position = walker.get_end_room().position * 32
 	exit.leaving_level.connect(reload_level)
-	print("Signal connected")  
 	
 	walker.queue_free()
 	var cells = []
