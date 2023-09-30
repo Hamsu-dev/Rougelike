@@ -6,6 +6,12 @@
 [ext_resource type="PackedScene" uid="uid://cde36vwaj0j40" path="res://component/health_component.tscn" id="3_o1k7y"]
 [ext_resource type="PackedScene" uid="uid://c6hqa5g8v3mqu" path="res://scenes/hurtbox.tscn" id="4_r0ufq"]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_kicr7"]
+size = Vector2(62, 25)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_s0c1a"]
+size = Vector2(62, 25)
+
 [sub_resource type="Animation" id="Animation_fd62x"]
 length = 0.001
 tracks/0/type = "value"
@@ -169,12 +175,6 @@ _data = {
 "hurt": SubResource("Animation_jh4xy"),
 "run": SubResource("Animation_ld5yf")
 }
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s0c1a"]
-size = Vector2(62, 25)
-
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_kicr7"]
-size = Vector2(62, 25)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5g31x"]
 atlas = ExtResource("3_31ccs")
@@ -361,10 +361,9 @@ script = ExtResource("2_biea2")
 
 [node name="HealthComponent" parent="." index="1" instance=ExtResource("3_o1k7y")]
 
-[node name="AnimationPlayer" parent="." index="2"]
-libraries = {
-"": SubResource("AnimationLibrary_kp0cb")
-}
+[node name="CollisionShape2D" parent="." index="2"]
+position = Vector2(1, 19.5)
+shape = SubResource("RectangleShape2D_kicr7")
 
 [node name="HurtboxComponent" parent="." index="3" node_paths=PackedStringArray("health_component") instance=ExtResource("4_r0ufq")]
 health_component = NodePath("../HealthComponent")
@@ -373,9 +372,10 @@ health_component = NodePath("../HealthComponent")
 position = Vector2(1, 19.5)
 shape = SubResource("RectangleShape2D_s0c1a")
 
-[node name="CollisionShape2D" parent="." index="4"]
-position = Vector2(1, 19.5)
-shape = SubResource("RectangleShape2D_kicr7")
+[node name="AnimationPlayer" parent="." index="4"]
+libraries = {
+"": SubResource("AnimationLibrary_kp0cb")
+}
 
 [node name="AnimatedSprite2D" parent="." index="5"]
 texture_filter = 1

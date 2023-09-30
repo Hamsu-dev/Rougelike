@@ -4,8 +4,8 @@ class_name Character
 
 const FRICTION: float = 0.15
 @export var hp: int = 10
-@export var acceleration: int = 40
-@export var max_speed: int = 100
+@export var acceleration: int = 30
+@export var max_speed: int = 50
 
 @onready var state_machine: Node = get_node('FiniteStateMachine')
 @onready var animated_sprite: AnimatedSprite2D = get_node('AnimatedSprite2D')
