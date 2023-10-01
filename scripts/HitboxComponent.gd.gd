@@ -17,3 +17,9 @@ func _ready() -> void:
 func _on_body_entered(body: PhysicsBody2D) -> void:
 	if body.has_method("take_damage"):
 		body.take_damage(damage, knockback_direction, knockback_force)
+
+func enable_collision():
+	collision_shape_2d.disabled = false
+
+func disable_collision():
+	collision_shape_2d.disabled = true

@@ -17,7 +17,8 @@ const MAX_SPEED = 60  # Adjust the speed as needed
 
 func _ready():
 	sword.visible = false
-
+	hitbox_component.disable_collision()
+	
 func _process(delta: float):
 	var mouse_direction: Vector2 = (get_global_mouse_position() - global_position).normalized()
 	global_position += move_direction * MAX_SPEED * delta
@@ -28,6 +29,7 @@ func _process(delta: float):
 		animated_sprite.flip_h = true
 	if Input.is_action_just_pressed('melee') and not sword_animation_player.is_playing():
 		sword.visible = true
+		hitbox_component.enable_collision()
 		sword_animation_player.play('melee')
 		sword_animation_player.animation_finished.connect(_on_sword_animation_player_animation_finished)
 
@@ -73,3 +75,4 @@ func dash():
 func _on_sword_animation_player_animation_finished(anim_name):
 	if anim_name == "melee":
 		sword.visible = false
+		hitbox_component.disable_collision()
